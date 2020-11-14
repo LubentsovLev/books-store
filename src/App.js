@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { Provider } from "react-redux";
+import { HashRouter, BrowserRouter } from "react-router-dom";
+import store from "./redux/redux_store";
+import Header from "./components/header/Header";
+import FadeMenu from "./components/menu/Menu";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header></Header>
+      <FadeMenu></FadeMenu>
     </div>
   );
 }
 
-export default App;
+const MainApp = (props) => {
+  return (
+    // <BrowserRouter basename={process.env.PUBLIC_URL}></BrowserRouter>
+    // <HashRouter></HashRouter>
+    <HashRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </HashRouter>
+  );
+};
+
+export default MainApp;
