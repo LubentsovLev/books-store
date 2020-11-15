@@ -1,16 +1,43 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { Provider } from "react-redux";
-import { HashRouter, BrowserRouter } from "react-router-dom";
+import {
+  HashRouter,
+  BrowserRouter,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import store from "./redux/redux_store";
 import Header from "./components/header/Header";
 import FadeMenu from "./components/menu/Menu";
+import Loader from "./components/common/loader";
+import BooksContainer from "./components/books/BooksContainer";
+import Cart from "./components/cart/Cart.jsx";
+import CartContainer from "./components/cart/CartContainer.jsx";
+import StickyFooter from "./components/common/material_tp/M_footer.jsx";
 
 function App() {
   return (
     <div>
-      <Header></Header>
-      <FadeMenu></FadeMenu>
+      <header className="app__header">
+        <Header></Header>
+      </header>
+      {/* <Loader></Loader> */}
+      <div className="app__main">
+        <Switch>
+          {/* <Route
+            exact
+            path="/"
+            render={() => <Redirect to={"/BooksContainer"} />}
+          /> */}
+          <Route path="/HarryPotter" render={() => <BooksContainer />} />
+          <Route path="/Cart" render={() => <CartContainer />} />
+        </Switch>
+      </div>
+      <footer>
+        <StickyFooter></StickyFooter>
+      </footer>
     </div>
   );
 }

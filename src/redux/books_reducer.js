@@ -1,5 +1,7 @@
 // import { commentsAPI, usersAPI } from "../api/api";
 
+import { HarryPotter } from "../api/api";
+
 const SET_BOOKS = "BOOKS/SET_BOOKS";
 const IS_FETCHING = "BOOKS/IS_FETCHING";
 
@@ -32,9 +34,11 @@ export const setIsFetching = (isFetching) => {
     isFetching,
   };
 };
-export const sendComments = (books) => async (dispath) => {
+export const addBooks = (books) => async (dispath) => {
+  console.log("addBooks in reducer");
   dispath(setIsFetching(true));
-  dispath(setBooks([1]));
+  let response = await HarryPotter.getHarryPotter();
+  dispath(setBooks(response.data.items));
   dispath(setIsFetching(false));
 };
 

@@ -2,9 +2,11 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { reducer as formReducer } from "redux-form";
 import booksReducer from "./books_reducer";
+import cartReducer from "./cart_reducer";
 let reducers = combineReducers({
   form: formReducer,
   books: booksReducer,
+  cart: cartReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

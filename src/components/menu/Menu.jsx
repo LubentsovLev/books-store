@@ -3,6 +3,8 @@ import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Fade from "@material-ui/core/Fade";
+import MenuIcon from "@material-ui/icons/Menu";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 export default function FadeMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -16,18 +18,11 @@ export default function FadeMenu() {
     setAnchorEl(null);
   };
   const [Show, setShow] = useState(false);
+  const [Selected, setSelected] = useState("");
 
   return (
     <div>
-      <Button
-        aria-controls="fade-menu"
-        aria-haspopup="true"
-        onClick={handleClick}
-        variant="contained"
-        color="primary"
-      >
-        Open with fade transition
-      </Button>
+      <MoreVertIcon onClick={handleClick}></MoreVertIcon>
       <Menu
         id="fade-menu"
         anchorEl={anchorEl}
@@ -40,9 +35,19 @@ export default function FadeMenu() {
           onClick={() => {
             setShow(true);
             handleClose();
+            setSelected("More info");
           }}
         >
-          Profile
+          More info about the book
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            setShow(true);
+            handleClose();
+            setSelected("To cart");
+          }}
+        >
+          Add to cart
         </MenuItem>
         <MenuItem
           onClick={() => {
@@ -50,11 +55,10 @@ export default function FadeMenu() {
             handleClose();
           }}
         >
-          My account
+          Close
         </MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
       </Menu>
-      {Show ? <div>me</div> : null}
+      {Show ? <div className="small_menu_sh_tx">{Selected}</div> : null}
     </div>
   );
 }
