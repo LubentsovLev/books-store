@@ -13,8 +13,22 @@ import Panel from "../panel/Panel";
 import { NavLink } from "react-router-dom";
 import { Badge } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import useScrollTrigger from "@material-ui/core/useScrollTrigger";
+import Slide from "@material-ui/core/Slide";
+function HideOnScroll(props) {
+  const { children, window } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({ target: window ? window() : undefined });
 
-const Header = () => {
+  return (
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  );
+}
+const Header = (props) => {
   const useStyles = makeStyles((theme) => ({
     search: {
       position: "relative",
@@ -80,49 +94,51 @@ const Header = () => {
   const CartBooks = useSelector((state) => state.cart.cartBooks);
   return (
     <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar className={classes.root}>
-          <div className={classes.hI}>
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="menu"
-            >
-              <Panel></Panel>
-            </IconButton>
-            <Typography variant="h6" className={classes.title}>
-              Books shop
-            </Typography>
-          </div>
-          <div className={classes.hI}>
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ "aria-label": "search" }}
-              />
+      <HideOnScroll {...props}>
+        <AppBar>
+          <Toolbar className={classes.root}>
+            <div className={classes.hI}>
+              <IconButton
+                edge="start"
+                className={classes.menuButton}
+                color="inherit"
+                aria-label="menu"
+              >
+                <Panel></Panel>
+              </IconButton>
+              <Typography variant="h6" className={classes.title}>
+                Books shop
+              </Typography>
             </div>
-            <NavLink
-              className={classes.ln}
-              to="/Cart"
-              activeClassName={"ln_active"}
-            >
-              <Button className={classes.cart} color="default">
-                <Badge badgeContent={CartBooks.length} color="secondary">
-                  <ShoppingCartIcon></ShoppingCartIcon>
-                </Badge>
-              </Button>
-            </NavLink>
-          </div>
-        </Toolbar>
-      </AppBar>
+            <div className={classes.hI}>
+              <div className={classes.search}>
+                <div className={classes.searchIcon}>
+                  <SearchIcon />
+                </div>
+                <InputBase
+                  placeholder="Search…"
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
+                  }}
+                  inputProps={{ "aria-label": "search" }}
+                />
+              </div>
+              <NavLink
+                className={classes.ln}
+                to="/Cart"
+                activeClassName={"ln_active"}
+              >
+                <Button className={classes.cart} color="default">
+                  <Badge badgeContent={CartBooks.length} color="secondary">
+                    <ShoppingCartIcon></ShoppingCartIcon>
+                  </Badge>
+                </Button>
+              </NavLink>
+            </div>
+          </Toolbar>
+        </AppBar>
+      </HideOnScroll>
     </div>
   );
 };

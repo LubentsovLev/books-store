@@ -42,13 +42,18 @@
   font-size: 12px;
 }
 .app__main {
-  min-height: 85vh;
+  min-height: 95vh;
+  padding-top: 70px;
 }
 .btn {
   text-decoration: none;
 }
-.flexCenter{
+.flexCenter {
   align-items: center;
   justify-content: center;
   display: flex;
+  flex-wrap: wrap;
+}
+.btn_sort_hp {
+  margin-top: 24px;
 }

@@ -85,17 +85,20 @@ export default function Book(props) {
       />
       <CardMedia
         className={classes.media}
-        image={inst.imageLinks.thumbnail}
+        image={inst.imageLinks ? inst.imageLinks.thumbnail : null}
         title="Paella dish"
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          <p>
-            <b> {inst.authors.length > 1 ? "authors" : "author"} :</b>
-            {inst.authors.map((i) => {
-              return <span className={classes.auth + ";"}>{i}</span>;
-            })}
-          </p>
+          {inst.authors ? (
+            <p>
+              <b> {inst.authors.length > 1 ? "authors" : "author"} :</b>
+              {inst.authors.map((i) => {
+                return <span className={classes.auth + ";"}>{i}</span>;
+              })}
+            </p>
+          ) : null}
+
           <p>
             <b>Count of pages :</b> {inst.pageCount}
           </p>

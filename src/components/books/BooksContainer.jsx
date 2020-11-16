@@ -12,15 +12,13 @@ const BooksContainer = React.memo((props) => {
   useEffect(() => {
     dispatch(addBooks());
   }, []);
-  useEffect(() => {
-    console.log(HarryPotter);
-  }, [HarryPotter, isFetching]);
+  useEffect(() => {}, [HarryPotter, isFetching]);
   return (
     <div className="">
       {isFetching ? (
         <Loader></Loader>
       ) : (
-        <Books HarryPotter={HarryPotter}></Books>
+        <Books addBooks={addBooks} HarryPotter={HarryPotter}></Books>
       )}
     </div>
   );

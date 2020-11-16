@@ -16,28 +16,33 @@ import BooksContainer from "./components/books/BooksContainer";
 import Cart from "./components/cart/Cart.jsx";
 import CartContainer from "./components/cart/CartContainer.jsx";
 import StickyFooter from "./components/common/material_tp/M_footer.jsx";
-
+import { Theaters } from "@material-ui/icons";
+import { ThemeProvider } from "@material-ui/core";
+import { unstable_createMuiStrictModeTheme } from "@material-ui/core/styles";
+const theme = unstable_createMuiStrictModeTheme();
 function App() {
   return (
     <div>
-      <header className="app__header">
-        <Header></Header>
-      </header>
-      {/* <Loader></Loader> */}
-      <div className="app__main">
-        <Switch>
-          {/* <Route
+      <ThemeProvider theme={theme}>
+        <header className="app__header">
+          <Header></Header>
+        </header>
+        {/* <Loader></Loader> */}
+        <div className="app__main">
+          <Switch>
+            {/* <Route
             exact
             path="/"
             render={() => <Redirect to={"/BooksContainer"} />}
           /> */}
-          <Route path="/HarryPotter" render={() => <BooksContainer />} />
-          <Route path="/Cart" render={() => <CartContainer />} />
-        </Switch>
-      </div>
-      <footer>
-        <StickyFooter></StickyFooter>
-      </footer>
+            <Route path="/HarryPotter" render={() => <BooksContainer />} />
+            <Route path="/Cart" render={() => <CartContainer />} />
+          </Switch>
+        </div>
+        <footer>
+          <StickyFooter></StickyFooter>
+        </footer>
+      </ThemeProvider>
     </div>
   );
 }

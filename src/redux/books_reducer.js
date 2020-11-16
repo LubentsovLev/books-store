@@ -34,10 +34,9 @@ export const setIsFetching = (isFetching) => {
     isFetching,
   };
 };
-export const addBooks = (books) => async (dispath) => {
-  console.log("addBooks in reducer");
+export const addBooks = (order, page, maxResults) => async (dispath) => {
   dispath(setIsFetching(true));
-  let response = await HarryPotter.getHarryPotter();
+  let response = await HarryPotter.getHarryPotter(order, page, maxResults);
   dispath(setBooks(response.data.items));
   dispath(setIsFetching(false));
 };

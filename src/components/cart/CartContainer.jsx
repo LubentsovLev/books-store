@@ -7,10 +7,9 @@ import "./cart.css";
 const CartContainer = () => {
   let dispatch = useDispatch();
   const CartBooks = useSelector((state) => state.cart.cartBooks);
-  const isFetching = useSelector((state) => state.books.isFetching);
+  const isFetching = useSelector((state) => state.cart.isFetching);
   useEffect(() => {
-    console.log(CartBooks);
-  }, []);
+  }, [CartBooks, isFetching]);
   return (
     <div>
       <Cart CartBooks={CartBooks} />
