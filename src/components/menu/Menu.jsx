@@ -5,8 +5,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Fade from "@material-ui/core/Fade";
 import MenuIcon from "@material-ui/icons/Menu";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { Link } from "@material-ui/core";
 
-export default function FadeMenu() {
+export default function FadeMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -35,12 +36,13 @@ export default function FadeMenu() {
           onClick={() => {
             setShow(true);
             handleClose();
-            setSelected("More info");
           }}
         >
-          More info about the book
+          <Link  href={props.inst.infoLink}>
+            see more info about
+          </Link>
         </MenuItem>
-        <MenuItem
+        {/* <MenuItem
           onClick={() => {
             setShow(true);
             handleClose();
@@ -48,7 +50,7 @@ export default function FadeMenu() {
           }}
         >
           Add to cart
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem
           onClick={() => {
             setShow(false);

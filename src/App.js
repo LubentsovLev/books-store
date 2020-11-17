@@ -36,6 +36,11 @@ function App() {
             render={() => <Redirect to={"/BooksContainer"} />}
           /> */}
             <Route path="/HarryPotter" render={() => <BooksContainer />} />
+            <Route path="/Pushkin" render={() => <BooksContainer />} />
+            <Route path="/Shakespeare" render={() => <BooksContainer />} />
+            <Route path="/GameOfThrones" render={() => <BooksContainer />} />
+            <Route path="/Sherlock" render={() => <BooksContainer />} />
+            <Route path="/Search" render={() => <BooksContainer />} />
             <Route path="/Cart" render={() => <CartContainer />} />
           </Switch>
         </div>

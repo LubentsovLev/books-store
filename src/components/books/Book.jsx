@@ -77,7 +77,7 @@ export default function Book(props) {
         action={
           <IconButton aria-label="settings">
             {/* <MoreVertIcon /> */}
-            <FadeMenu></FadeMenu>
+            <FadeMenu inst={inst}></FadeMenu>
           </IconButton>
         }
         title={inst.title}

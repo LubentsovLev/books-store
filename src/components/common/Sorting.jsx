@@ -69,7 +69,7 @@ export default function SortingHarry(props) {
   };
   const handleNumber = (event) => {
     event.target.value = +event.target.value < 0 ? 0 : +event.target.value;
-    event.target.value = +event.target.value > 200 ? 200 : +event.target.value;
+    event.target.value = +event.target.value > 160 ? 160 : +event.target.value;
     let val = event.target.value;
     setNumber(val);
     settouched(true);
@@ -133,7 +133,7 @@ export default function SortingHarry(props) {
       <div className="btn_sort_hp">
         <Button
           onClick={() => {
-            dispatch(props.addBooks(Order, Number, Count));
+            props.addBooks(Order, Number, Count);
           }}
           variant="outlined"
           color="primary"

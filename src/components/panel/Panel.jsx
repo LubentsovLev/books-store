@@ -16,6 +16,17 @@ import FlashOnIcon from "@material-ui/icons/FlashOn";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import NewReleasesIcon from "@material-ui/icons/NewReleases";
+import BrushIcon from "@material-ui/icons/Brush";
+import WhatshotIcon from "@material-ui/icons/Whatshot";
+import SearchIcon from "@material-ui/icons/Search";
+import {
+  addBooks,
+  Pushkin,
+  Shakespeare,
+  GameOfThrones,
+  Sherlock,
+} from "../../redux/books_reducer";
+import { useDispatch } from "react-redux";
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -32,9 +43,16 @@ const useStyles = makeStyles({
     color: "#3f51b5",
     textDecoration: "none",
   },
+  menuMain: {
+    display: "flex",
+    justifyContent: "space-between",
+    height: "100vh",
+    flexDirection: "column",
+  },
 });
 
 export default function Panel() {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [state, setState] = React.useState({
     top: false,
@@ -72,56 +90,148 @@ export default function Panel() {
         </ListItem>
       </List>
       <Divider /> */}
-      <List>
-        <NavLink
-          className={classes.ln}
-          to="/HarryPotter"
-          activeClassName={"ln_active"}
-        >
-          <ListItem button key="Starred">
-            <ListItemIcon>
-              <FlashOnIcon color="primary"></FlashOnIcon>
-            </ListItemIcon>
-            <ListItemText primary="Harry Potter" />
-          </ListItem>
-        </NavLink>
-        <Divider />
-        {/* fddf */}
-        <NavLink className={classes.ln} to="/New" activeClassName={"ln_active"}>
-          <ListItem button key="Starred">
-            <ListItemIcon>
-              <NewReleasesIcon color="primary"></NewReleasesIcon>
-            </ListItemIcon>
-            <ListItemText primary=" Новинки" />
-          </ListItem>
-        </NavLink>
-        <Divider />
-        {/* fddf */}
-        <NavLink className={classes.ln} to="/Top" activeClassName={"ln_active"}>
-          <ListItem button key="Starred">
-            <ListItemIcon>
-              <FavoriteIcon color="secondary"></FavoriteIcon>
-            </ListItemIcon>
-            <ListItemText color="secondary" primary="Топ книг" />
-          </ListItem>
-        </NavLink>
-        <Divider />
-        {/* fddf */}
-        <NavLink
-          className={classes.ln}
-          to="/Cart"
-          activeClassName={"ln_active"}
-        >
-          <ListItem button key="Starred">
-            <ListItemIcon>
-              <ShoppingCartIcon color="primary"></ShoppingCartIcon>
-            </ListItemIcon>
-            <ListItemText primary="Go to cart" />
-          </ListItem>
-        </NavLink>
-        <Divider />
-        {/* fddf */}
-      </List>
+      <div className={classes.menuMain}>
+        <div className={classes.items}>
+          <List>
+            {/* <NavLink
+              className={classes.ln}
+              to="/HarryPotter"
+              activeClassName={"ln_active"}
+            >
+              <ListItem button key="Starred">
+                <ListItemIcon>
+                  <FlashOnIcon color="primary"></FlashOnIcon>
+                </ListItemIcon>
+                <ListItemText primary="Harry Potter" />
+              </ListItem>
+            </NavLink>
+            <Divider />
+            <NavLink
+              className={classes.ln}
+              to="/New"
+              activeClassName={"ln_active"}
+            >
+              <ListItem button key="Starred">
+                <ListItemIcon>
+                  <NewReleasesIcon color="primary"></NewReleasesIcon>
+                </ListItemIcon>
+                <ListItemText primary=" Новинки" />
+              </ListItem>
+            </NavLink>
+            <Divider /> */}
+            {/* <NavLink
+              className={classes.ln}
+              to="/Top"
+              activeClassName={"ln_active"}
+            >
+              <ListItem button key="Starred">
+                <ListItemIcon>
+                  <FavoriteIcon color="secondary"></FavoriteIcon>
+                </ListItemIcon>
+                <ListItemText color="secondary" primary="Топ книг" />
+              </ListItem>
+            </NavLink> 
+                        <Divider />
+            */}
+            <NavLink
+              className={classes.ln}
+              to="/HarryPotter"
+              activeClassName={"ln_active"}
+              onClick={() => {
+                dispatch(addBooks());
+              }}
+            >
+              <ListItem button key="Starred">
+                <ListItemIcon>
+                  <FlashOnIcon color="primary"></FlashOnIcon>
+                </ListItemIcon>
+                <ListItemText primary="Harry Potter" />
+              </ListItem>
+            </NavLink>
+            <Divider />
+            <NavLink
+              className={classes.ln}
+              to="/Pushkin"
+              activeClassName={"ln_active"}
+              onClick={() => {
+                dispatch(Pushkin());
+              }}
+            >
+              <ListItem button key="Starred">
+                <ListItemIcon>
+                  <BrushIcon color="primary"></BrushIcon>
+                </ListItemIcon>
+                <ListItemText primary="Pushkin" />
+              </ListItem>
+            </NavLink>
+            <Divider />
+            <NavLink
+              className={classes.ln}
+              to="/Shakespeare"
+              activeClassName={"ln_active"}
+              onClick={() => {
+                dispatch(Shakespeare());
+              }}
+            >
+              <ListItem button key="Starred">
+                <ListItemIcon>
+                  <FavoriteIcon color="secondary"></FavoriteIcon>
+                </ListItemIcon>
+                <ListItemText primary="Shakespeare" />
+              </ListItem>
+            </NavLink>
+            <Divider />
+            <NavLink
+              className={classes.ln}
+              to="/GameOfThrones"
+              activeClassName={"ln_active"}
+              onClick={() => {
+                dispatch(GameOfThrones());
+              }}
+            >
+              <ListItem button key="Starred">
+                <ListItemIcon>
+                  <WhatshotIcon color="secondary"></WhatshotIcon>
+                </ListItemIcon>
+                <ListItemText primary="Game of thrones" />
+              </ListItem>
+            </NavLink>
+            <Divider />
+            <NavLink
+              className={classes.ln}
+              to="/Sherlock"
+              activeClassName={"ln_active"}
+              onClick={() => {
+                dispatch(Sherlock());
+              }}
+            >
+              <ListItem button key="Starred">
+                <ListItemIcon>
+                  <SearchIcon></SearchIcon>
+                </ListItemIcon>
+                <ListItemText primary="Sherlock" />
+              </ListItem>
+            </NavLink>
+            <Divider />
+          </List>
+        </div>
+        <div className={classes.cart}>
+          <Divider />
+          <NavLink
+            className={classes.ln}
+            to="/Cart"
+            activeClassName={"ln_active"}
+          >
+            <ListItem button key="Starred">
+              <ListItemIcon>
+                <ShoppingCartIcon color="primary"></ShoppingCartIcon>
+              </ListItemIcon>
+              <ListItemText primary="Go to cart" />
+            </ListItem>
+          </NavLink>
+          <Divider />
+        </div>
+      </div>
     </div>
   );
 

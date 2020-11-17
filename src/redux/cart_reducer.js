@@ -25,7 +25,7 @@ const cartReducer = (state = initialState, action) => {
 
         state.cartBooks[i] = newObj;
         state.cartBooks[i].count = isNaN(state.cartBooks[i].count)
-          ? 2
+          ? 1
           : state.cartBooks[i].count + 1;
         CHFirst = true;
       }

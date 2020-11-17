@@ -10,11 +10,15 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import Panel from "../panel/Panel";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import { Badge } from "@material-ui/core";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import Slide from "@material-ui/core/Slide";
+import { Input } from "@material-ui/core";
+import { AllBooksMenu } from "../../api/api";
+import { Search } from "../../redux/books_reducer";
+import s from "./header.module.css";
 function HideOnScroll(props) {
   const { children, window } = props;
   // Note that you normally won't need to set the window ref as useScrollTrigger
@@ -49,13 +53,16 @@ const Header = (props) => {
       padding: theme.spacing(0, 2),
       height: "100%",
       position: "absolute",
-      pointerEvents: "none",
+      zIndex: 1000,
+      // pointerEvents: "none",
+      cursor: "pointer",
+      paddingRight: 10,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
     },
     inputRoot: {
-      color: "inherit",
+      // color: "inherit",
     },
     inputInput: {
       padding: theme.spacing(1, 1, 1, 0),
@@ -89,11 +96,53 @@ const Header = (props) => {
     cart: {
       color: "#fff",
     },
+    searchInner: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      color: "#fff",
+    },
   }));
   const classes = useStyles();
   const CartBooks = useSelector((state) => state.cart.cartBooks);
+  let dispatch = useDispatch();
+  const [touched, settouched] = React.useState(true);
+  const [Inblur, setInblur] = React.useState(false);
+  const [red, setred] = React.useState(false);
+  const SearchInput = React.useRef(null);
+  React.useEffect(() => {
+    const onKeypress = (e) => {
+      if (e.key === "Enter" && Inblur) {
+        handleSearch();
+      }
+    };
+    document.addEventListener("keypress", onKeypress);
+  }, [Inblur]);
+  const handleSearch = (event) => {
+    if (SearchInput.current.firstChild.value) {
+      // SearchInput.current.firstChild.autofocus
+      SearchInput.current.firstChild.value =
+        SearchInput.current.firstChild.value.length > 20
+          ? SearchInput.current.firstChild.value.slice(0, 20)
+          : SearchInput.current.firstChild.value;
+      dispatch(Search(SearchInput.current.firstChild.value));
+      SearchInput.current.firstChild.value = "";
+      setred(true);
+    } else {
+      settouched(false);
+    }
+    // dispatch(Search(SearchInput.current.firstChild.value));
+  };
+  let CHTouched = (event) => {
+    if (event.target.dataset.value === "") {
+      settouched(false);
+    } else {
+      settouched(true);
+    }
+  };
   return (
     <div className={classes.root}>
+      {red ? <Redirect from="/Cart" to="/Search" /> : null}
       <HideOnScroll {...props}>
         <AppBar>
           <Toolbar className={classes.root}>
@@ -106,23 +155,52 @@ const Header = (props) => {
               >
                 <Panel></Panel>
               </IconButton>
-              <Typography variant="h6" className={classes.title}>
-                Books shop
+              <Typography variant="h6">
+                <span className={s.title}>Books shop</span>
               </Typography>
             </div>
             <div className={classes.hI}>
               <div className={classes.search}>
                 <div className={classes.searchIcon}>
-                  <SearchIcon />
+                  <NavLink
+                    className={classes.searchInner}
+                    to="/Search"
+                    activeClassName={"ln_active"}
+                  >
+                    <SearchIcon
+                      onClick={() => {
+                        handleSearch();
+                      }}
+                    />
+                  </NavLink>
                 </div>
-                <InputBase
+                <Input
                   placeholder="Search…"
+                  ref={SearchInput}
+                  onClick={() => {
+                    console.log(Inblur);
+                    setInblur(true);
+                  }}
                   classes={{
                     root: classes.inputRoot,
                     input: classes.inputInput,
                   }}
                   inputProps={{ "aria-label": "search" }}
-                />
+                  onChange={CHTouched}
+                  // color={touched ? "secondary" : "primary"}
+                  error={!touched}
+                ></Input>
+                {/* <InputBase
+                  placeholder="Search…"
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
+                  }}
+                  onChange={CHTouched}
+                  color={touched ? 'secondary' : 'primary'}
+                  error={true}
+                  inputProps={{ "aria-label": "search" }}
+                /> */}
               </div>
               <NavLink
                 className={classes.ln}

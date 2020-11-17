@@ -15,9 +15,9 @@ import { useDispatch } from "react-redux";
 import { addCart, removeCart, deleteCart } from "../../redux/cart_reducer";
 const useStyles = makeStyles({
   root: {
-    maxWidth: 320,
+    maxWidth: 250,
     margin: " 0 auto",
-    minWidth: "320px",
+    // minWidth: "320px",
     backgroundColor: "#d3d9ff",
     margin: "7px",
     display: "flex",
@@ -93,7 +93,7 @@ export default function CartCard(props) {
               </Button> */}
               <div className={classes.PM}>
                 <Badge
-                  badgeContent={i.count}
+                  badgeContent={i.count === undefined ? 1 : i.count + 1}
                   color="secondary"
                   className={classes.Pls}
                 >
