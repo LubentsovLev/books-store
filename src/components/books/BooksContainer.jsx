@@ -18,6 +18,8 @@ const BooksContainer = React.memo((props) => {
   const isFetching = useSelector((state) => state.books.isFetching);
   const menuType = useSelector((state) => state.books.menuType);
   const search = useSelector((state) => state.books.search);
+  const [on1, setOn1] = React.useState(false);
+  const [on2, setOn2] = React.useState(false);
 
   // const [Mtype, setMtype] = React.useState();
   // let thAll = [addBooks, Pushkin, Shakespeare, GameOfThrones, Sherlock];
@@ -29,8 +31,11 @@ const BooksContainer = React.memo((props) => {
   //   }
   // };
   let chMenu = (Order, Number, Count) => {
-    switch (menuType) {
-      case "addBooks": {
+    switch (props.loc) {
+      case "HarryPotter": {
+        return dispatch(addBooks(Order, Number, Count));
+      }
+      case "": {
         return dispatch(addBooks(Order, Number, Count));
       }
       case "Pushkin": {
@@ -49,15 +54,15 @@ const BooksContainer = React.memo((props) => {
         return dispatch(Search(search, Order, Number, Count));
       }
       default:
-        return dispatch(addBooks(Order, Number, Count));
+      // debugger;
+      // return dispatch(addBooks(Order, Number, Count));
     }
   };
   useEffect(() => {
     chMenu();
     // dispatch(addBooks());
-  }, []);
+  }, [props.loc]);
   useEffect(() => {
-    console.log(search);
   }, [HarryPotter, isFetching, menuType, search]);
   return (
     <div className="">

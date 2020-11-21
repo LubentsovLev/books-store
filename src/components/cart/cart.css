@@ -345,6 +345,13 @@
   .shopping__cart .grid .cart h2 {
     text-align: left;
   }
+  .card__inner {
+    flex-direction: column;
+  }
+  .rightPart{
+    width: 100% !important;
+    margin-top: 40px;
+  }
 }
 .shopping__cart {
   margin: 0 auto;
@@ -352,6 +359,5 @@
   align-items: center;
   justify-content: center;
 }
-.products{
-  
+.products {
 }

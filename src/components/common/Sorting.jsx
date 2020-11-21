@@ -68,14 +68,16 @@ export default function SortingHarry(props) {
     settouched(true);
   };
   const handleNumber = (event) => {
-    event.target.value = +event.target.value < 0 ? 0 : +event.target.value;
+    event.target.value = +event.target.value < 0 ? 1 : +event.target.value;
+    event.target.value = +event.target.value === 0 ? 1 : +event.target.value;
     event.target.value = +event.target.value > 160 ? 160 : +event.target.value;
     let val = event.target.value;
     setNumber(val);
     settouched(true);
   };
   const handleCount = (event) => {
-    event.target.value = +event.target.value < 0 ? 0 : +event.target.value;
+    event.target.value = +event.target.value < 0 ? 1 : +event.target.value;
+    event.target.value = +event.target.value === 0 ? 1 : +event.target.value;
     event.target.value = +event.target.value > 40 ? 40 : +event.target.value;
     let val = event.target.value;
     setCount(val);

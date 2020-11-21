@@ -58,6 +58,39 @@ export const AllBooksMenu = {
     );
   },
 };
+export const Genius = {
+  // getGenius() {
+  //   return axios
+  //     .get(
+  //       `https://api.genius.com/oauth/authorize?
+  //     client_id=3FEeuPBxjY19xcq6lHbU4A0I1GR43Ki6DLdf8hdwj8eKtzlyy-IXHCjInN4OB9fL&
+  //     redirect_uri=http://localhost:3000/&
+  //     scope=me&
+  //     state=lev&
+  //     response_type=code`,
+  //       {
+  //         headers: {
+  //           Accept: 'application / json',
+  //           Authorization:
+  //             "poIZnukSjDU6yJQEoPNYVEmgbnaB1Sq4CB3HGrvcHuXncd8dGQ82YJeeo0MGRzqy",
+  //         },
+  //       }
+  //     )
+  //     .then((data) => {
+  //       debugger;
+  //       return data.data;
+  //     });
+  // },
+  getGenius(q = "bieber") {
+    let token =
+      "poIZnukSjDU6yJQEoPNYVEmgbnaB1Sq4CB3HGrvcHuXncd8dGQ82YJeeo0MGRzqy";
+    return axios
+      .get(`https://api.genius.com/search?access_token=${token}&q=${q}`, {})
+      .then((data) => {
+        return data.data;
+      });
+  },
+};
 
 // export const AllBooks = {
 //   getAllBooks(page = 0, maxResults =20) {

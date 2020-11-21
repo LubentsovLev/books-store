@@ -111,7 +111,7 @@ export default function Book(props) {
 
           <p>
             <Link color="secondary" href={inst.infoLink}>
-              see more info about
+              see more info about the book
             </Link>
           </p>
         </Typography>

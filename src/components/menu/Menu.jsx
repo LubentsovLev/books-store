@@ -39,7 +39,7 @@ export default function FadeMenu(props) {
           }}
         >
           <Link  href={props.inst.infoLink}>
-            see more info about
+            see more info
           </Link>
         </MenuItem>
         {/* <MenuItem

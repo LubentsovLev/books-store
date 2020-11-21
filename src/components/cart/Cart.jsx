@@ -13,32 +13,36 @@ const Cart = (props) => {
     <div className="">
       {props.CartBooks.length > 0 ? (
         <div className="flexCenter">
-          <CartCard i={inst}></CartCard>
+          <CartCard
+            AllthePr={props.AllthePr}
+            allThePrice={props.allThePrice}
+            i={inst}
+          ></CartCard>
         </div>
       ) : (
         <div className="shopping__cart flexCenter ">
           <div id="app">
-            <div class="grid flexCenter">
-              <div class="col-dx">
-                <div class="cart">
-                  <div class="empty-contents">
-                    <div class="draw">
-                      <div class="cactus">
-                        <div class="arm"></div> <div class="arm"></div>
+            <div className="grid flexCenter">
+              <div className="col-dx">
+                <div className="cart">
+                  <div className="empty-contents">
+                    <div className="draw">
+                      <div className="cactus">
+                        <div className="arm"></div> <div className="arm"></div>
                       </div>
-                      <div class="cactus">
-                        <div class="arm"></div> <div class="arm"></div>
+                      <div className="cactus">
+                        <div className="arm"></div> <div className="arm"></div>
                       </div>
-                      <div class="cactus">
-                        <div class="arm"></div> <div class="arm"></div>
+                      <div className="cactus">
+                        <div className="arm"></div> <div className="arm"></div>
                       </div>
-                      <div class="sky">
-                        <div class="montain"></div>{" "}
-                        <div class="montain two"></div>
-                        <div class="sun"></div>
+                      <div className="sky">
+                        <div className="montain"></div>{" "}
+                        <div className="montain two"></div>
+                        <div className="sun"></div>
                       </div>
                     </div>
-                    <p class="no-items-text">Your cart is actually empty</p>
+                    <p className="no-items-text">Your cart is actually empty</p>
                     <div className="flexCenter">
                       <NavLink
                         className="btn"

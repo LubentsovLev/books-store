@@ -19,14 +19,16 @@ import NewReleasesIcon from "@material-ui/icons/NewReleases";
 import BrushIcon from "@material-ui/icons/Brush";
 import WhatshotIcon from "@material-ui/icons/Whatshot";
 import SearchIcon from "@material-ui/icons/Search";
+import HomeIcon from "@material-ui/icons/Home";
 import {
   addBooks,
   Pushkin,
   Shakespeare,
   GameOfThrones,
   Sherlock,
+  setMenuType,
 } from "../../redux/books_reducer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -49,9 +51,13 @@ const useStyles = makeStyles({
     height: "100vh",
     flexDirection: "column",
   },
+  gen : {
+    width : 25
+  }
 });
 
-export default function Panel() {
+export default function Panel(props) {
+  const menuType = useSelector((state) => state.books.menuType);
   const dispatch = useDispatch();
   const classes = useStyles();
   const [state, setState] = React.useState({
@@ -135,10 +141,33 @@ export default function Panel() {
             */}
             <NavLink
               className={classes.ln}
+              to="/Main"
+              activeClassName={"ln_active"}
+              // onClick={() => {
+              //   dispatch(addBooks());
+              // }}
+            >
+              <ListItem button key="Starred">
+                <ListItemIcon>
+                  {/* <HomeIcon color="primary">
+                    
+                  </HomeIcon> */}
+                  <img
+                    className={classes.gen}
+                    src="https://savemusic.me/uploads/cover/artist/ffd9392b39d6af001961cb83ba4a2fd5.jpg"
+                    alt=""
+                  />
+                </ListItemIcon>
+                <ListItemText primary="Check for some lyrics" />
+              </ListItem>
+            </NavLink>
+            <NavLink
+              className={classes.ln}
               to="/HarryPotter"
               activeClassName={"ln_active"}
               onClick={() => {
                 dispatch(addBooks());
+                // dispatch(setMenuType(props.loc));
               }}
             >
               <ListItem button key="Starred">

@@ -1,0 +1,33 @@
+.title {
+  color: #ffff64;
+  margin-left: 10px;
+}
+.input {
+  border: none;
+  border-bottom: 1px solid #ffff64;
+  padding: 10px 5px;
+  margin-bottom: 10px;
+  background-color: transparent;
+  margin-right: 20px;
+  color: #ffff64;
+}
+.btn {
+  transition: 0.3s;
+  margin-top: 10px;
+  border: none;
+  padding: 10px 5px;
+  border-radius: 5px;
+  background-color: #000;
+  color: #ffff64;
+  cursor: pointer;
+  border: none;
+}
+::-webkit-input-placeholder {
+  color: #ffff64;
+}
+.main {
+  background-color: rgb(37, 37, 37);
+}
+.wh {
+  color: #fff;
+}

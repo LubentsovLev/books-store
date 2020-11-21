@@ -61,7 +61,7 @@ export const addBooks = (order, page, maxResults) => async (dispath) => {
   let response = await HarryPotter.getHarryPotter(order, page, maxResults);
   dispath(setBooks(response.data.items));
   dispath(setIsFetching(false));
-  dispath(setMenuType("addBooks"));
+  dispath(setMenuType("HarryPotter"));
 };
 export const Pushkin = (order, page, maxResults) => async (dispath) => {
   dispath(setIsFetching(true));

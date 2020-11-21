@@ -7,12 +7,33 @@ import "./cart.css";
 const CartContainer = () => {
   let dispatch = useDispatch();
   const CartBooks = useSelector((state) => state.cart.cartBooks);
-  const isFetching = useSelector((state) => state.cart.isFetching);
+  const [AllthePr, setAllthePr] = React.useState(true);
+  let g = 0;
+  let allThePrice = () => {
+    for (let i = 0; i < CartBooks.length; i++) {
+      let inst = CartBooks[i];
+      let count;
+      if (inst.count === undefined || inst.count === 0) {
+        count = 1;
+      } else {
+        count = inst.count + 1;
+      }
+      g = g + inst.price * count;
+      setAllthePr(g);
+    }
+    g = 0;
+  };
   useEffect(() => {
-  }, [CartBooks, isFetching]);
+    allThePrice();
+  }, [CartBooks]);
+  // setAllthePr(g);
+
+  const isFetching = useSelector((state) => state.cart.isFetching);
+  useEffect(() => {}, [CartBooks, isFetching]);
+  console.log(AllthePr);
   return (
     <div>
-      <Cart CartBooks={CartBooks} />
+      <Cart allThePrice={allThePrice} AllthePr={AllthePr} CartBooks={CartBooks} />
     </div>
   );
 };

@@ -102,6 +102,9 @@ const Header = (props) => {
       justifyContent: "center",
       color: "#fff",
     },
+    mainHeader: {
+      backgroundColor: "#4a6498",
+    },
   }));
   const classes = useStyles();
   const CartBooks = useSelector((state) => state.cart.cartBooks);
@@ -144,7 +147,7 @@ const Header = (props) => {
     <div className={classes.root}>
       {red ? <Redirect from="/Cart" to="/Search" /> : null}
       <HideOnScroll {...props}>
-        <AppBar>
+        <AppBar className={classes.mainHeader}>
           <Toolbar className={classes.root}>
             <div className={classes.hI}>
               <IconButton
@@ -153,7 +156,7 @@ const Header = (props) => {
                 color="inherit"
                 aria-label="menu"
               >
-                <Panel></Panel>
+                <Panel loc={props.loc}></Panel>
               </IconButton>
               <Typography variant="h6">
                 <span className={s.title}>Books shop</span>
@@ -178,7 +181,6 @@ const Header = (props) => {
                   placeholder="Search…"
                   ref={SearchInput}
                   onClick={() => {
-                    console.log(Inblur);
                     setInblur(true);
                   }}
                   classes={{
