@@ -55,7 +55,7 @@ function App(props) {
             render={() => <Redirect to={"/BooksContainer"} />}
           /> */}
             <Route exact path="/" render={() => <BooksContainer loc={loc} />} />
-            <Route path="/Main" render={() => <Main />} />
+            <Route path="/Genius" render={() => <Main />} />
             <Route path="/HarryPotter" render={() => <BooksContainer loc={loc} />} />
             <Route path="/Pushkin" render={() => <BooksContainer loc={loc} />} />
             <Route path="/Shakespeare" render={() => <BooksContainer loc={loc} />} />

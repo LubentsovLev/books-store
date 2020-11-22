@@ -5,6 +5,8 @@ import { Button } from "@material-ui/core";
 import "./cartRight.scss";
 import { Field, reduxForm } from "redux-form";
 import { sendMail } from "../../api/api";
+import { useDispatch } from "react-redux";
+import { addCheckout } from "../../redux/genius_reducer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,13 +17,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CartRight(props) {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const CartAdressFormSub = (values) => {
-    sendMail.sendMail(
-      values.City,
-      values.Name,
-      values.Postal_code,
-      values.Email
+    dispatch(
+      addCheckout(values.City, values.Name, values.Postal_code, values.Email)
     );
     console.log(values);
   };

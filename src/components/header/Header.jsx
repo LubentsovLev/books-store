@@ -18,7 +18,9 @@ import Slide from "@material-ui/core/Slide";
 import { Input } from "@material-ui/core";
 import { AllBooksMenu } from "../../api/api";
 import { Search } from "../../redux/books_reducer";
-import s from "./header.module.css";
+import s from "./header.module.scss";
+import { Field, reduxForm } from "redux-form";
+import { addLyrics } from "../../redux/genius_reducer";
 function HideOnScroll(props) {
   const { children, window } = props;
   // Note that you normally won't need to set the window ref as useScrollTrigger
@@ -105,6 +107,16 @@ const Header = (props) => {
     mainHeader: {
       backgroundColor: "#4a6498",
     },
+    maingenius: {
+      backgroundColor: "#000",
+    },
+    img: {
+      width: 25,
+    },
+    genPanel: {
+      marginLeft: "-25px",
+      opacity: 0,
+    },
   }));
   const classes = useStyles();
   const CartBooks = useSelector((state) => state.cart.cartBooks);
@@ -113,6 +125,7 @@ const Header = (props) => {
   const [Inblur, setInblur] = React.useState(false);
   const [red, setred] = React.useState(false);
   const SearchInput = React.useRef(null);
+  const query = useSelector((state) => state.genius.query);
   React.useEffect(() => {
     const onKeypress = (e) => {
       if (e.key === "Enter" && Inblur) {
@@ -143,11 +156,19 @@ const Header = (props) => {
       settouched(true);
     }
   };
+  const GenOnSub = (values) => {
+    console.log(values);
+    dispatch(addLyrics(values.Genius));
+  };
   return (
     <div className={classes.root}>
       {red ? <Redirect from="/Cart" to="/Search" /> : null}
       <HideOnScroll {...props}>
-        <AppBar className={classes.mainHeader}>
+        <AppBar
+          className={
+            props.loc === "Genius" ? classes.maingenius : classes.mainHeader
+          }
+        >
           <Toolbar className={classes.root}>
             <div className={classes.hI}>
               <IconButton
@@ -156,65 +177,73 @@ const Header = (props) => {
                 color="inherit"
                 aria-label="menu"
               >
-                <Panel loc={props.loc}></Panel>
+                {props.loc === "Genius" ? (
+                  <div className="flexCenter">
+                    <img
+                      src="https://images.genius.com/572b51ce3c79ecabece7c4a976ba915f.1000x1000x1.png"
+                      alt=""
+                      className={classes.img}
+                    />
+                    <span className={classes.genPanel}>
+                      <Panel loc={props.loc}></Panel>
+                    </span>
+                  </div>
+                ) : (
+                  <Panel loc={props.loc}></Panel>
+                )}
               </IconButton>
-              <Typography variant="h6">
-                <span className={s.title}>Books shop</span>
-              </Typography>
+              <span className={props.loc === "Genius" ? s.gtitle : s.title}>
+                {props.loc === "Genius" ? "Genius" : "Books shop"}
+              </span>
             </div>
             <div className={classes.hI}>
-              <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                  <NavLink
-                    className={classes.searchInner}
-                    to="/Search"
-                    activeClassName={"ln_active"}
-                  >
-                    <SearchIcon
-                      onClick={() => {
-                        handleSearch();
-                      }}
-                    />
-                  </NavLink>
+              {props.loc === "Genius" ? (
+                <GeniusFromReduxSearch query={query} onSubmit={GenOnSub} />
+              ) : (
+                <div className={classes.search}>
+                  <div className={classes.searchIcon}>
+                    <NavLink
+                      className={classes.searchInner}
+                      to="/Search"
+                      activeClassName={"ln_active"}
+                    >
+                      <SearchIcon
+                        onClick={() => {
+                          handleSearch();
+                        }}
+                      />
+                    </NavLink>
+                  </div>
+                  <Input
+                    placeholder="Search…"
+                    ref={SearchInput}
+                    onClick={() => {
+                      setInblur(true);
+                    }}
+                    classes={{
+                      root: classes.inputRoot,
+                      input: classes.inputInput,
+                    }}
+                    inputProps={{ "aria-label": "search" }}
+                    onChange={CHTouched}
+                    // color={touched ? "secondary" : "primary"}
+                    error={!touched}
+                  ></Input>
                 </div>
-                <Input
-                  placeholder="Search…"
-                  ref={SearchInput}
-                  onClick={() => {
-                    setInblur(true);
-                  }}
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                  }}
-                  inputProps={{ "aria-label": "search" }}
-                  onChange={CHTouched}
-                  // color={touched ? "secondary" : "primary"}
-                  error={!touched}
-                ></Input>
-                {/* <InputBase
-                  placeholder="Search…"
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                  }}
-                  onChange={CHTouched}
-                  color={touched ? 'secondary' : 'primary'}
-                  error={true}
-                  inputProps={{ "aria-label": "search" }}
-                /> */}
-              </div>
-              <NavLink
-                className={classes.ln}
-                to="/Cart"
-                activeClassName={"ln_active"}
-              >
-                <Button className={classes.cart} color="default">
-                  <Badge badgeContent={CartBooks.length} color="secondary">
-                    <ShoppingCartIcon></ShoppingCartIcon>
-                  </Badge>
-                </Button>
-              </NavLink>
+              )}
+              {props.loc === "Genius" ? null : (
+                <NavLink
+                  className={classes.ln}
+                  to="/Cart"
+                  activeClassName={"ln_active"}
+                >
+                  <Button className={classes.cart} color="default">
+                    <Badge badgeContent={CartBooks.length} color="secondary">
+                      <ShoppingCartIcon></ShoppingCartIcon>
+                    </Badge>
+                  </Button>
+                </NavLink>
+              )}
             </div>
           </Toolbar>
         </AppBar>
@@ -222,4 +251,25 @@ const Header = (props) => {
     </div>
   );
 };
+
+let GeniusFromSearch = (props) => {
+  return (
+    <form className={s.form} onSubmit={props.handleSubmit}>
+      <Field
+        className={s.input}
+        name="Genius"
+        placeholder={props.query}
+        component="input"
+        required
+      ></Field>
+      <button className={s.btn}>
+        <SearchIcon className={s.searchg}></SearchIcon>
+      </button>
+    </form>
+  );
+};
+const GeniusFromReduxSearch = reduxForm({
+  form: "GeniusFromSearch",
+})(GeniusFromSearch);
+
 export default Header;

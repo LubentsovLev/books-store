@@ -1,0 +1,46 @@
+@media (max-width: 550px) {
+  .title {
+    display: none;
+  }
+}
+@media (max-width: 365px) {
+  .gtitle {
+    display: none;
+  }
+}
+.input {
+  border: none;
+  border-bottom: 1px solid #ffff64;
+  padding: 0px 5px 10px 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background-color: transparent;
+  color: #ffff64;
+}
+// .makeStyles-hI-24 {
+//   ::-webkit-input-placeholder {
+//     color: #ffff64;
+//   }
+// }
+.btn {
+  transition: 0.3s;
+  border: none;
+  border-radius: 5px;
+  background-color: #000;
+  color: #ffff64;
+  cursor: pointer;
+  border: none;
+  margin-bottom: -5px;
+}
+.searchg {
+  color: #ffff64;
+}
+.form {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.gtitle {
+  color: #ffff64;
+}

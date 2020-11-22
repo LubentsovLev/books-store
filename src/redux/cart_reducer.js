@@ -5,6 +5,7 @@ import { HarryPotter } from "../api/api";
 const SET_CART_BOOKS = "CART/SET_CART_BOOKS";
 const REMOVE_CART_BOOKS = "CART/REMOVE_CART_BOOKS";
 const DELETE_CART_BOOKS = "CART/DELETE_CART_BOOKS";
+const DELETE_ALL = "CART/DELETE_ALL";
 const IS_FETCHING = "CART/IS_FETCHING";
 
 let initialState = {
@@ -75,6 +76,9 @@ const cartReducer = (state = initialState, action) => {
     case REMOVE_CART_BOOKS: {
       return { ...state, cartBooks: [...state.cartBooks] };
     }
+    case DELETE_ALL: {
+      return { ...state, cartBooks: action.books };
+    }
     case DELETE_CART_BOOKS: {
       return { ...state, cartBooks: [...state.cartBooks] };
     }
@@ -94,6 +98,12 @@ export const setCartBooks = (books) => {
 export const removeCartBooks = (books) => {
   return {
     type: REMOVE_CART_BOOKS,
+    books,
+  };
+};
+export const removeAllBooks = (books) => {
+  return {
+    type: DELETE_ALL,
     books,
   };
 };

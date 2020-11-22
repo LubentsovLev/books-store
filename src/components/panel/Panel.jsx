@@ -141,7 +141,7 @@ export default function Panel(props) {
             */}
             <NavLink
               className={classes.ln}
-              to="/Main"
+              to="/Genius"
               activeClassName={"ln_active"}
               // onClick={() => {
               //   dispatch(addBooks());

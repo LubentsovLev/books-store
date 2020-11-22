@@ -8,22 +8,22 @@ import { Field, reduxForm } from "redux-form";
 import Loader from "../common/loader";
 
 export let Main = (props) => {
-  let dispath = useDispatch();
+  let dispatch = useDispatch();
   const CartBooks = useSelector((state) => state.genius.lyrics);
   const isFetching = useSelector((state) => state.genius.isFetching);
   const query = useSelector((state) => state.genius.query);
   React.useEffect(() => {}, [CartBooks, isFetching, query]);
   React.useEffect(() => {
-    dispath(addLyrics("Monster"));
+    dispatch(addLyrics("Monster"));
   }, []);
   const GenOnSub = (values) => {
     console.log(values);
-    dispath(addLyrics(values.Genius));
+    dispatch(addLyrics(values.Genius));
   };
   return (
     <div className={s.main}>
       <div className="flexCenter">
-        <GeniusReduxForm onSubmit={GenOnSub} />
+        {/* <GeniusReduxForm onSubmit={GenOnSub} /> */}
       </div>
       <div className="flexCenter">
         <b className={s.wh}> searching for </b><span className={s.title}>{query}</span>
