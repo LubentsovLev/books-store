@@ -22,11 +22,12 @@
   cursor: pointer;
   border: none;
 }
-::-webkit-input-placeholder {
-  color: #ffff64;
-}
+
 .main {
   background-color: rgb(37, 37, 37);
+  ::-webkit-input-placeholder {
+    color: #ffff64;
+  }
 }
 .wh {
   color: #fff;

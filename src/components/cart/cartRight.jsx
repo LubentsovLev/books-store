@@ -4,6 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
 import "./cartRight.scss";
 import { Field, reduxForm } from "redux-form";
+import { sendMail } from "../../api/api";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,11 +17,17 @@ const useStyles = makeStyles((theme) => ({
 export default function CartRight(props) {
   const classes = useStyles();
   const CartAdressFormSub = (values) => {
+    sendMail.sendMail(
+      values.City,
+      values.Name,
+      values.Postal_code,
+      values.Email
+    );
     console.log(values);
   };
   const [ChCode, setChCode] = React.useState("");
   const CartCodeFormSub = (values) => {
-    if (values.Code !== "TheBest20") {
+    if (values.Code !== "The20") {
       setChCode("Not");
     } else {
       setChCode("yes");
@@ -66,13 +73,13 @@ let cartFrom = (props) => {
       {/* <TextField id="filled-basic" label="Country"  />
             <TextField id="filled-basic" label="City"  />
             <TextField id="filled-basic" label="Postal code" /> */}
-      <Field
+      {/* <Field
         className=""
-        name="fullName"
+        name="Country"
         placeholder="Country"
         component="input"
         required
-      ></Field>
+      ></Field> */}
       <Field
         className=""
         name="City"
@@ -82,8 +89,23 @@ let cartFrom = (props) => {
       ></Field>
       <Field
         className=""
+        name="Name"
+        placeholder="Name"
+        component="input"
+        required
+      ></Field>
+
+      <Field
+        className=""
         name="Postal_code"
         placeholder="Postal code"
+        component="input"
+        required
+      ></Field>
+      <Field
+        className=""
+        name="Email"
+        placeholder="email"
         component="input"
         required
       ></Field>

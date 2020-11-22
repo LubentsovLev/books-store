@@ -70,7 +70,7 @@ const useStyles = makeStyles({
   },
   rightPart: {
     width: 310,
-    minWidth: 400,
+    // minWidth: 400,
   },
 });
 

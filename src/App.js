@@ -63,6 +63,7 @@ function App(props) {
             <Route path="/Sherlock" render={() => <BooksContainer  loc={loc}/>} />
             <Route path="/Search" render={() => <BooksContainer loc={loc} />} />
             <Route path="/Cart" render={() => <CartContainer />} />
+            {/* <Route path="/" render={() => <CartContainer />} /> */}
             <Route exact path="*" render={() => <div>404 NOT FOUND</div>} />
           </Switch>
         </div>
@@ -80,11 +81,11 @@ const MainApp = (props) => {
   return (
     // <BrowserRouter basename={process.env.PUBLIC_URL}></BrowserRouter>
     // <HashRouter></HashRouter>
-    <HashRouter>
+    <BrowserRouter>
       <Provider store={store}>
         <WrappedApp />
       </Provider>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 

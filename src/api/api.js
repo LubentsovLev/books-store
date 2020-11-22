@@ -59,28 +59,6 @@ export const AllBooksMenu = {
   },
 };
 export const Genius = {
-  // getGenius() {
-  //   return axios
-  //     .get(
-  //       `https://api.genius.com/oauth/authorize?
-  //     client_id=3FEeuPBxjY19xcq6lHbU4A0I1GR43Ki6DLdf8hdwj8eKtzlyy-IXHCjInN4OB9fL&
-  //     redirect_uri=http://localhost:3000/&
-  //     scope=me&
-  //     state=lev&
-  //     response_type=code`,
-  //       {
-  //         headers: {
-  //           Accept: 'application / json',
-  //           Authorization:
-  //             "poIZnukSjDU6yJQEoPNYVEmgbnaB1Sq4CB3HGrvcHuXncd8dGQ82YJeeo0MGRzqy",
-  //         },
-  //       }
-  //     )
-  //     .then((data) => {
-  //       debugger;
-  //       return data.data;
-  //     });
-  // },
   getGenius(q = "bieber") {
     let token =
       "poIZnukSjDU6yJQEoPNYVEmgbnaB1Sq4CB3HGrvcHuXncd8dGQ82YJeeo0MGRzqy";
@@ -91,11 +69,21 @@ export const Genius = {
       });
   },
 };
-
-// export const AllBooks = {
-//   getAllBooks(page = 0, maxResults =20) {
-//     return axios.get(
-//       `https://www.googleapis.com/books/v1/volumes?q=-&maxResults20&startIndex=${page}$maxResults=${maxResults}`
-//     );
-//   },
-// };
+export const sendMail = {
+  async sendMail(City, Name, Postal_code, Email) {
+    const response = await fetch("/api/form", {
+      method: "POST", // или 'PUT'
+      body: JSON.stringify({City, Name, Postal_code, Email}),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(response);
+    // const form = await axios.post(`/api/form`, {
+    //   City,
+    //   Name,
+    //   Postal_code,
+    //   Email,
+    // });
+  },
+};
